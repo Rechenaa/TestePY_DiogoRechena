@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/css/uikit.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.16.23/dist/js/uikit-icons.min.js"></script>
+    <title>BancoPY | Dashboard</title>
+</head>
+<body>
+        <div class = "uk-margin uk-card-default uk-card-body uk-text-large" style="background-color: #35b234; color: white">
+            <div class="uk-text.small">
+                Nome:{{data["nome"]}}<br>Idade:{{data["idade"]}}
+            </div>
+            <div class = "ul-text-large">
+                BancoPY | Dinheiro Disponivel : {{data["dinheiro"]}}
+            </div>
+            <div class="ul-text-normal">
+                Numero da conta. {{data["numeroConta"]}}
+            </div>
+        </div>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% id messages %}
+                {% for category, message in messages %}
+                    <div uk-alert style ="margin: 1rem;" class="uk-alert-{{category}}" ul-alert>
+                        {{ message }}
+                    <a class="uk-alert-close" uk-close></a>
+                    </div>
+                {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form class="uk-padding" action="/aplicacaoemperstimo/" method="POST">
+        <fieldset class="uk-fieldset">
+            <legend class = "uk-legend">Pedir emprestimo</legend>
+            <div class = "uk-margin">
+                <input class = "uk-input" name="quantidade" type="text" placeholder="Quantidade para emprestimo (€)..." required>
+            </div>
+            <input class = "uk-button uk-button-default" type="submit" value="Pedir emprestimo" style="background-color: #35b234; color: white">
+        </fieldset>
+    </form>
+    <form class="uk-padding" method="POST" action="/enviardinheiro/">
+        <fieldset class="uk-fieldset">
+            <legend class = "uk-legend">Enviar dinheiro</legend>
+            <div class="uk-margin">
+                <input class="uk-input" name="conta" type="text" placeholder="numeroConta..." required>
+            </div>
+            <div class="uk-margin">
+                <input class="uk-input" name="quantidade" type="text" placeholder="quantidade(€)..." required>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

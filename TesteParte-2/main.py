@@ -1,4 +1,3 @@
-import fastapi
 from fastapi import FastAPI, Response, status
 import sqlite3, classes, random
 
